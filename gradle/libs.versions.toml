@@ -21,6 +21,7 @@ coilVersion = "3.3.0"
 kvault = "1.12.0"
 qrose = "1.0.1"
 composeIcons = "1.7.3"
+koin = "4.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -57,6 +58,9 @@ sqldelight-native = { module = "app.cash.sqldelight:native-driver", version.ref 
 kvault = { module = "com.liftric:kvault", version.ref = "kvault" }
 qrose = { module = "io.github.alexzhirkevich:qrose", version.ref = "qrose" }
 composeIconsExtended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "composeIcons" }
+koinCore = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koinCompose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koinComposeViewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

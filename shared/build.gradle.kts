@@ -64,6 +64,9 @@ kotlin {
             implementation(libs.kvault)
             implementation(libs.qrose)
             implementation(libs.composeIconsExtended)
+            implementation(libs.koinCore)
+            implementation(libs.koinCompose)
+            implementation(libs.koinComposeViewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

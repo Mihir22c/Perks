@@ -8,42 +8,44 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import org.example.project.data.CardsRepository
+import org.example.project.di.appModule
 import org.example.project.ui.cards.CardsScreen
 import org.example.project.ui.cards.CardsViewModel
 import org.example.project.ui.offers.OffersScreen
 import org.example.project.ui.offers.OffersViewModel
+import org.koin.compose.KoinApplication
+import org.koin.compose.viewmodel.koinViewModel
 
 
 private enum class AppTab { Offers, Cards }
 @Composable
 fun App() {
-    MaterialTheme {
-        var tab by remember { mutableStateOf(AppTab.Offers) }
-        val offersVm = remember { OffersViewModel(createOffersRepository()) }
-        val cardsVm = remember { CardsViewModel(createCardsRepository()) }
-
-        Scaffold(
-            bottomBar = {
-                NavigationBar {
-                    NavigationBarItem(
-                        selected = tab == AppTab.Offers,
-                        onClick = { tab = AppTab.Offers },
-                        icon = { Icon(Icons.Default.List, contentDescription = "Offers") },
-                        label = { Text("Offers") },
-                    )
-                    NavigationBarItem(
-                        selected = tab == AppTab.Cards,
-                        onClick = { tab = AppTab.Cards },
-                        icon = { Icon(Icons.Default.Star, contentDescription = "Cards") },
-                        label = { Text("Cards") },
-                    )
+    KoinApplication(application = { modules(appModule) }) {
+        MaterialTheme {
+            var tab by remember { mutableStateOf(AppTab.Offers) }
+            Scaffold(
+                bottomBar = {
+                    NavigationBar {
+                        NavigationBarItem(
+                            selected = tab == AppTab.Offers,
+                            onClick = { tab = AppTab.Offers },
+                            icon = { Text("🎁") },
+                            label = { Text("Offers") },
+                        )
+                        NavigationBarItem(
+                            selected = tab == AppTab.Cards,
+                            onClick = { tab = AppTab.Cards },
+                            icon = { Text("💳") },
+                            label = { Text("Cards") },
+                        )
+                    }
                 }
-            }
-        ) { padding ->
-            Surface(Modifier.padding(padding)) {
-                when (tab) {
-                    AppTab.Offers -> OffersScreen(offersVm)
-                    AppTab.Cards -> CardsScreen(cardsVm)
+            ) { padding ->
+                Surface(Modifier.padding(padding)) {
+                    when (tab) {
+                        AppTab.Offers -> OffersScreen(koinViewModel())
+                        AppTab.Cards -> CardsScreen(koinViewModel())
+                    }
                 }
             }
         }
