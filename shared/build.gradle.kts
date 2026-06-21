@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -16,6 +17,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
+            linkerOpts("-lsqlite3")
         }
     }
     
@@ -39,6 +41,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.ktor.okhttp)
+            implementation(libs.sqldelight.android)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -53,12 +56,26 @@ kotlin {
             implementation(libs.ktor.content.negotiation)
             implementation(libs.ktor.json)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.lifecycleViewmodel)
+            implementation(libs.lifecycleViewmodelCompose)
+            implementation(libs.coil)
+            implementation(libs.coilNetwork)
+            implementation(libs.sqldelight.coroutines)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
         iosMain.dependencies {
             implementation(libs.ktor.darwin)
+            implementation(libs.sqldelight.native)
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        create("PerksDatabase") {
+            packageName.set("org.example.project.db")
         }
     }
 }

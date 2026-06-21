@@ -1,0 +1,17 @@
+CREATE TABLE OfferEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    imageUrl TEXT NOT NULL,
+    isFavourite INTEGER NOT NULL DEFAULT 0
+);
+
+selectAll:
+SELECT * FROM OfferEntity;
+
+upsert:
+INSERT OR REPLACE INTO OfferEntity(id, title, description, imageUrl, isFavourite)
+VALUES (?, ?, ?, ?, ?);
+
+setFavourite:
+UPDATE OfferEntity SET isFavourite = ? WHERE id = ?;
