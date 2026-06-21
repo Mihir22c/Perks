@@ -1,0 +1,13 @@
+CREATE TABLE CardEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+selectAll:
+SELECT * FROM CardEntity ORDER BY name;
+
+insert:
+INSERT INTO CardEntity(id, name) VALUES (?, ?);
+
+deleteById:
+DELETE FROM CardEntity WHERE id = ?;

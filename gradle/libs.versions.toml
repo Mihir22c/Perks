@@ -18,6 +18,9 @@ kotlinxSerialization = "1.9.0"
 sqldelight = "2.1.0"
 lifecycleVersion = "2.9.4"
 coilVersion = "3.3.0"
+kvault = "1.12.0"
+qrose = "1.0.1"
+composeIcons = "1.7.3"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -51,6 +54,9 @@ sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sq
 sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 sqldelight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+kvault = { module = "com.liftric:kvault", version.ref = "kvault" }
+qrose = { module = "io.github.alexzhirkevich:qrose", version.ref = "qrose" }
+composeIconsExtended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "composeIcons" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

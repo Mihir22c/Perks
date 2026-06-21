@@ -61,6 +61,9 @@ kotlin {
             implementation(libs.coil)
             implementation(libs.coilNetwork)
             implementation(libs.sqldelight.coroutines)
+            implementation(libs.kvault)
+            implementation(libs.qrose)
+            implementation(libs.composeIconsExtended)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
