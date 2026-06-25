@@ -13,5 +13,3 @@ fun createHttpClient(): HttpClient = HttpClient(httpClientEngineFactory()) {
         json(Json { ignoreUnknownKeys = true })
     }
 }
-
-fun createOffersApi(): OffersApi = OffersApi(createHttpClient())
