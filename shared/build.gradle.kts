@@ -70,6 +70,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.kotlinxCoroutinesTest)
         }
         iosMain.dependencies {
             implementation(libs.ktor.darwin)

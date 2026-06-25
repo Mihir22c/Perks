@@ -6,6 +6,8 @@ import org.example.project.data.CardsRepository
 import org.example.project.data.OffersRepository
 import org.example.project.data.local.CardsDao
 import org.example.project.data.local.OffersDao
+import org.example.project.data.local.SqlOffersDao
+import org.example.project.data.remote.KtorOffersApi
 import org.example.project.data.remote.OffersApi
 import org.example.project.db.createDatabase
 import org.example.project.ui.cards.CardsViewModel
@@ -16,11 +18,11 @@ import org.koin.dsl.module
 val appModule = module {
     // networking
     single { createHttpClient() }
-    single { OffersApi(get()) }
+    single<OffersApi> { KtorOffersApi(get()) }
 
     // database
     single { createDatabase() }
-    single { OffersDao(get()) }
+    single<OffersDao> { SqlOffersDao(get()) }
     single { CardsDao(get()) }
 
     // secure storage

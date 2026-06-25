@@ -8,35 +8,23 @@ import kotlinx.coroutines.flow.map
 import org.example.project.Offer
 import org.example.project.db.PerksDatabase
 
-class OffersDao(db: PerksDatabase) {
+interface OffersDao {
+    fun observeAll(): Flow<List<Offer>>
+    fun upsertAll(offers: List<Offer>)
+}
+
+class SqlOffersDao(db: PerksDatabase) : OffersDao {
     private val queries = db.offerQueries
 
-    fun observeAll(): Flow<List<Offer>> =
+    override fun observeAll(): Flow<List<Offer>> =
         queries.selectAll()
             .asFlow()
             .mapToList(Dispatchers.Default)
-            .map { rows ->
-                rows.map { row ->
-                    Offer(
-                        id = row.id.toInt(),
-                        title = row.title,
-                        description = row.description,
-                        imageUrl = row.imageUrl,
-                    )
-                }
-            }
+            .map { rows -> rows.map { Offer(it.id.toInt(), it.title, it.description, it.imageUrl) } }
 
-    fun upsertAll(offers: List<Offer>) {
+    override fun upsertAll(offers: List<Offer>) {
         queries.transaction {
-            offers.forEach { offer ->
-                queries.upsert(
-                    id = offer.id.toLong(),
-                    title = offer.title,
-                    description = offer.description,
-                    imageUrl = offer.imageUrl,
-                    isFavourite = 0L,
-                )
-            }
+            offers.forEach { queries.upsert(it.id.toLong(), it.title, it.description, it.imageUrl, 0) }
         }
     }
 }
